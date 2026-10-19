@@ -1,0 +1,116 @@
+{
+  "title": "AZ-305 · Core architecture 10 Questions",
+  "questions": [
+    {
+      "ques": "A company needs to run a mission-critical application across two Azure regions. It must fail over automatically if the primary region becomes unavailable. Which design should you recommend?",
+      "ans": ["a"],
+      "options": [
+        { "id": "a", "text": "Deploy the application in both regions and use <b>Azure Front Door</b> with health-based routing." },
+        { "id": "b", "text": "Deploy the application in one region across multiple availability zones." },
+        { "id": "c", "text": "Use Azure Traffic Manager with priority routing, but deploy the application only in the primary region." },
+        { "id": "d", "text": "Back up the virtual machines to a paired region and restore them after an outage." }
+      ],
+      "explanation": "<b>Correct: A.</b> Front Door can route globally to healthy regional deployments, enabling automatic cross-region failover. <b>B</b> protects against zonal failures, not a regional outage. <b>C</b> has no healthy secondary deployment to receive traffic. <b>D</b> requires recovery work and is not automatic application failover."
+    },
+    {
+      "ques": "A solution stores customer documents in Azure Blob Storage. Users should access only their own documents, and the application must avoid storing long-lived storage keys. What should you use?",
+      "ans": ["b"],
+      "options": [
+        { "id": "a", "text": "Store the storage account key in the application configuration and filter documents in the UI." },
+        { "id": "b", "text": "Use Microsoft Entra ID with managed identity and authorize access with Azure RBAC or scoped user delegation SAS tokens." },
+        { "id": "c", "text": "Make the container public and use unguessable blob names." },
+        { "id": "d", "text": "Create a separate storage account key for each user." }
+      ],
+      "explanation": "<b>Correct: B.</b> Managed identity avoids long-lived application secrets; user delegation SAS can grant narrowly scoped, time-limited access. <b>A</b> exposes a broad credential and UI filtering is not authorization. <b>C</b> exposes documents publicly. <b>D</b> uses account keys, which do not provide practical per-user least-privilege authorization."
+    },
+    {
+      "ques": "An application needs a globally distributed relational database with low-latency reads, strong consistency, and automatic failover. Which Azure Cosmos DB capability should you select?",
+      "ans": ["a"],
+      "options": [
+        { "id": "a", "text": "<b>Multi-region writes</b> with the Strong consistency level." },
+        { "id": "b", "text": "A single write region with Eventual consistency." },
+        { "id": "c", "text": "Azure SQL Database geo-replication with asynchronous secondary reads." },
+        { "id": "d", "text": "Cosmos DB multi-region writes with Consistent Prefix consistency." }
+      ],
+      "explanation": "<b>Correct: A.</b> Multi-region writes support local writes in distributed regions, while Strong consistency provides the required latest-value guarantee (subject to its latency and availability trade-offs). <b>B</b> does not provide strong consistency or regional write locality. <b>C</b> uses asynchronous replication, so secondary reads can be stale. <b>D</b> does not guarantee the latest committed value."
+    },
+    {
+      "ques": "A company must connect its on-premises network to an Azure virtual network over a private, dedicated connection. The connection must not traverse the public internet. What should you implement?",
+      "ans": ["c"],
+      "options": [
+        { "id": "a", "text": "A site-to-site VPN gateway using an IPsec tunnel." },
+        { "id": "b", "text": "Azure Bastion for private remote access to virtual machines." },
+        { "id": "c", "text": "<b>Azure ExpressRoute</b> through a connectivity provider." },
+        { "id": "d", "text": "Azure Front Door with a private origin." }
+      ],
+      "explanation": "<b>Correct: C.</b> ExpressRoute provides private connectivity through a connectivity provider without traversing the public internet. <b>A</b> encrypts traffic but sends it over the internet. <b>B</b> provides VM administration access, not network-to-network connectivity. <b>D</b> publishes and routes application traffic; it is not a dedicated WAN connection."
+    },
+    {
+      "ques": "A web application runs on Azure App Service and needs to read secrets from Azure Key Vault without storing credentials in code. Which two actions should you take?",
+      "ans": ["a", "d"],
+      "options": [
+        { "id": "a", "text": "Enable a managed identity for the App Service." },
+        { "id": "b", "text": "Add the Key Vault access key to the application's source code." },
+        { "id": "c", "text": "Allow public network access from every source and rely on the secret value for security." },
+        { "id": "d", "text": "Grant the managed identity only the required secret permissions or role in Key Vault." },
+        { "id": "e", "text": "Create a user account with owner permissions and configure its password in app settings." }
+      ],
+      "explanation": "<b>Correct: A and D.</b> The managed identity authenticates without an application secret, and a narrowly scoped Key Vault role grants least-privilege access. <b>B</b> hard-codes a credential. <b>C</b> unnecessarily exposes the vault's network endpoint. <b>E</b> introduces a long-lived, overprivileged credential."
+    },
+    {
+      "ques": "A team needs to move a large on-premises SQL Server database to Azure with minimal application changes. The database depends on SQL Server Agent jobs and cross-database queries. Which destination is the best fit?",
+      "ans": ["b"],
+      "options": [
+        { "id": "a", "text": "Azure SQL Database single database." },
+        { "id": "b", "text": "<b>SQL Server on an Azure virtual machine</b>." },
+        { "id": "c", "text": "Azure Table Storage." },
+        { "id": "d", "text": "Azure SQL Database serverless." }
+      ],
+      "explanation": "<b>Correct: B.</b> SQL Server on a VM provides the broadest SQL Server compatibility, including SQL Server Agent and cross-database features, minimizing changes. <b>A</b> and <b>D</b> are managed database services with feature differences that may require remediation. <b>C</b> is a NoSQL key-value store, not a SQL Server migration target."
+    },
+    {
+      "ques": "An organization must govern subscriptions owned by different business units. It needs consistent policy assignment, consolidated billing, and a way to group subscriptions by department. Which Azure construct should you use?",
+      "ans": ["c"],
+      "options": [
+        { "id": "a", "text": "Resource groups, because they can contain subscriptions." },
+        { "id": "b", "text": "Management groups, but keep each subscription outside the hierarchy to preserve billing." },
+        { "id": "c", "text": "<b>Management groups</b> to organize subscriptions and inherit policy assignments." },
+        { "id": "d", "text": "Azure tags alone, because tags enforce policy inheritance across subscriptions." }
+      ],
+      "explanation": "<b>Correct: C.</b> Management groups organize subscriptions and let policies and access assignments inherit down the hierarchy. <b>A</b> is incorrect because resource groups are contained within subscriptions. <b>B</b> misses the hierarchy that enables inheritance. <b>D</b> tags help organize and report on resources but do not provide policy inheritance."
+    },
+    {
+      "ques": "A company needs to process a high volume of telemetry events, distribute them to multiple consumers, and retain events for replay. Which Azure service is the best fit?",
+      "ans": ["d"],
+      "options": [
+        { "id": "a", "text": "Azure Queue Storage with one queue shared by all consumers." },
+        { "id": "b", "text": "Azure Service Bus queues with competing consumers." },
+        { "id": "c", "text": "Azure Event Grid with push notifications and no event retention." },
+        { "id": "d", "text": "<b>Azure Event Hubs</b> with consumer groups and event retention." }
+      ],
+      "explanation": "<b>Correct: D.</b> Event Hubs ingests high-throughput streams, supports independent consumer groups, and retains events for replay within the configured retention period. <b>A</b> is not designed for high-throughput event streaming or independent replay by consumer groups. <b>B</b> is a message broker for enterprise messaging patterns, not a telemetry stream. <b>C</b> routes events but does not provide Event Hubs-style stream retention and replay."
+    },
+    {
+      "ques": "An application needs to publish a new deployment gradually, observe health, and automatically route users away from an unhealthy deployment. Which approach best meets the requirement?",
+      "ans": ["a"],
+      "options": [
+        { "id": "a", "text": "Use <b>Azure App Configuration feature flags</b> for gradual exposure and health monitoring/rollback in the deployment pipeline." },
+        { "id": "b", "text": "Replace every production instance at once during a maintenance window." },
+        { "id": "c", "text": "Use Azure Backup to restore the application when users report a problem." },
+        { "id": "d", "text": "Use an availability set to progressively enable the new application version." }
+      ],
+      "explanation": "<b>Correct: A.</b> Feature flags support controlled rollout, while deployment health checks and rollback keep unhealthy releases from remaining exposed. <b>B</b> is a big-bang deployment, not a gradual rollout. <b>C</b> is a recovery mechanism, not deployment traffic control. <b>D</b> improves VM availability across fault and update domains; it does not manage application release exposure."
+    },
+    {
+      "ques": "A company needs centralized diagnostics for Azure resources and applications, with the ability to query logs and correlate them with metrics and alerts. Which platform should you recommend?",
+      "ans": ["b"],
+      "options": [
+        { "id": "a", "text": "Azure Advisor only." },
+        { "id": "b", "text": "<b>Azure Monitor</b> with Log Analytics workspaces and Application Insights." },
+        { "id": "c", "text": "Azure Service Health only." },
+        { "id": "d", "text": "Microsoft Defender for Cloud only." }
+      ],
+      "explanation": "<b>Correct: B.</b> Azure Monitor centralizes metrics and alerts; Log Analytics enables log queries, and Application Insights provides application telemetry. <b>A</b> gives recommendations, not a centralized diagnostics platform. <b>C</b> reports Azure service incidents and maintenance affecting subscriptions. <b>D</b> focuses on security posture and threat protection."
+    }
+  ]
+}

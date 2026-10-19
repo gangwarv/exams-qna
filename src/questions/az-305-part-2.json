@@ -1,0 +1,1280 @@
+{
+  "title": "AZ-305 part 2",
+  "questions": [
+    {
+      "ques": "VM subnet internet traffic must pass through centralized inspection and use controlled public egress addresses. Which two elements should the design include? <b>Select TWO answers.</b>",
+      "ans": [
+        "a",
+        "e"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A route directing internet-bound traffic to Azure Firewall"
+        },
+        {
+          "id": "b",
+          "text": "An NSG allow rule with no routing to the firewall"
+        },
+        {
+          "id": "c",
+          "text": "A NAT Gateway alone, expected to perform centralized application-rule inspection"
+        },
+        {
+          "id": "d",
+          "text": "Direct public egress on every VM that bypasses the inspection path"
+        },
+        {
+          "id": "e",
+          "text": "Azure Firewall rules and public IP configuration for the allowed egress"
+        }
+      ],
+      "explanation": "<b>Correct: A and E.</b> Routes must direct traffic through Azure Firewall, and firewall policies and SNAT configuration control inspected egress. NAT provides translation rather than full firewall inspection; NSGs do not create the required central path. Bypass egress defeats the design.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a connectivity solution that connects Azure resources to the internet."
+    },
+    {
+      "ques": "An auditor asks what Transparent Data Encryption protects in an Azure SQL database. Which statement is correct?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "It replaces database authorization"
+        },
+        {
+          "id": "b",
+          "text": "It automatically encrypts every result before an authorized query receives it"
+        },
+        {
+          "id": "c",
+          "text": "It encrypts database files and backups at rest but does not prevent authorized SQL users from reading data"
+        },
+        {
+          "id": "d",
+          "text": "It makes all network connections private"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> TDE protects persisted database and backup data. The engine decrypts data for authorized queries, so permissions, network security, and client-side protection remain separate design concerns.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for data protection."
+    },
+    {
+      "ques": "A data lake needs directory-level ACLs and efficient directory operations for analytical workloads. Which storage capability should you enable when designing the account?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A queue service endpoint"
+        },
+        {
+          "id": "b",
+          "text": "An Azure SQL elastic pool"
+        },
+        {
+          "id": "c",
+          "text": "Azure Data Lake Storage Gen2 hierarchical namespace"
+        },
+        {
+          "id": "d",
+          "text": "Anonymous blob access"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> The hierarchical namespace adds file-system-oriented directory operations and ACL support to the data lake. Anonymous access weakens security, while queue endpoints and SQL pools do not supply these storage semantics.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a data storage solution to balance features, performance, and costs."
+    },
+    {
+      "ques": "An Azure SQL database must preserve selected backups for several years for audit purposes. Which feature should you configure?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Long-term backup retention"
+        },
+        {
+          "id": "b",
+          "text": "Only connection retry logic"
+        },
+        {
+          "id": "c",
+          "text": "Only active geo-replication"
+        },
+        {
+          "id": "d",
+          "text": "Only a larger compute tier"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> Long-term retention preserves selected full backups beyond normal point-in-time retention. Geo-replication maintains a current copy, compute sizing affects capacity, and retries do not retain historical data.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a backup and recovery solution for databases."
+    },
+    {
+      "ques": "A database has a strict regional RTO that is shorter than the observed time to geo-restore its backups. Which design improvement should you recommend?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Add zone redundancy in the primary region and remove the regional recovery target"
+        },
+        {
+          "id": "b",
+          "text": "Reduce DNS TTL without provisioning any recovered database capacity"
+        },
+        {
+          "id": "c",
+          "text": "Maintain a geo-secondary with tested failover and accept the documented replication RPO tradeoff"
+        },
+        {
+          "id": "d",
+          "text": "Increase backup frequency and assume this guarantees a shorter restore duration"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> A geo-secondary can avoid rebuilding the database from backups during recovery, reducing RTO with an asynchronous RPO tradeoff. More frequent backups improve recovery-point granularity, not necessarily restore duration. DNS and primary-region zones do not create a regional recovery database.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a backup and recovery solution for databases."
+    },
+    {
+      "ques": "A company must migrate hundreds of terabytes of files, but its WAN cannot transfer them within the deadline. Which service should it evaluate for the initial bulk transfer?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Microsoft Entra application proxy"
+        },
+        {
+          "id": "b",
+          "text": "Azure Data Box"
+        },
+        {
+          "id": "c",
+          "text": "Azure Traffic Manager"
+        },
+        {
+          "id": "d",
+          "text": "Azure Application Gateway"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Data Box transfers large datasets through a shipped appliance, subject to regional availability and capacity. Later changes may require online synchronization. Traffic routing and web publication services are not offline bulk data transfer mechanisms.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for migrating unstructured data."
+    },
+    {
+      "ques": "Guest users have long-lived access to a sensitive project group. Resource owners must periodically confirm whether access is still needed. Which feature should you recommend?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Storage lifecycle management"
+        },
+        {
+          "id": "b",
+          "text": "A permanent subscription Owner assignment"
+        },
+        {
+          "id": "c",
+          "text": "Azure Monitor metric alerts"
+        },
+        {
+          "id": "d",
+          "text": "Microsoft Entra access reviews"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Access reviews enable recurring reviews of group or application access and can apply review outcomes. Monitoring and storage policies do not govern guest membership, and permanent Owner access increases exposure.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for identity governance."
+    },
+    {
+      "ques": "A company is preparing its first large Azure migration. Which Cloud Adoption Framework activity should establish identity, network, governance, and subscription foundations before workload onboarding?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Prepare an Azure landing zone in the Ready methodology"
+        },
+        {
+          "id": "b",
+          "text": "Treat application source control as the entire cloud foundation"
+        },
+        {
+          "id": "c",
+          "text": "Buy the largest VM sizes before assessment"
+        },
+        {
+          "id": "d",
+          "text": "Move all servers first and decide access boundaries later"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> The Ready methodology and landing zones establish the platform foundation for adoption. Moving workloads or buying capacity before setting governance and network foundations creates avoidable migration risks.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Evaluate a migration solution that leverages the Microsoft Cloud Adoption Framework for Azure."
+    },
+    {
+      "ques": "A containerized API has intermittent traffic and needs managed HTTP ingress and scaling to zero, without direct Kubernetes cluster administration. Which service fits?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure Managed Disks"
+        },
+        {
+          "id": "b",
+          "text": "Azure Dedicated Host"
+        },
+        {
+          "id": "c",
+          "text": "Azure Container Apps with a suitable scaling configuration"
+        },
+        {
+          "id": "d",
+          "text": "AKS solely for mandatory full control of cluster nodes"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Container Apps provides managed container hosting, ingress, and event-driven scaling, including zero replicas for suitable configurations. AKS adds cluster administration responsibilities; hosts and disks alone are not managed API runtimes.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a container-based solution."
+    },
+    {
+      "ques": "An Azure SQL Database is expected to grow far beyond conventional single-database storage limits and needs rapid storage growth plus additional read replicas. Which tier should be evaluated?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "An elastic pool assumed to combine all databases into one unlimited-storage database"
+        },
+        {
+          "id": "b",
+          "text": "A conventional General Purpose database assumed to have unlimited storage as it grows"
+        },
+        {
+          "id": "c",
+          "text": "Hyperscale"
+        },
+        {
+          "id": "d",
+          "text": "Basic with a higher client connection limit to bypass storage limits"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Hyperscale is designed for very large Azure SQL databases and scalable storage with replica options. Client connections do not increase storage limits, conventional tiers remain bounded, and an elastic pool shares compute without merging databases into one larger database.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a solution for database scalability."
+    },
+    {
+      "ques": "A large SQL Server database must move to SQL Managed Instance with only a brief cutover. Which approach should you evaluate after compatibility assessment?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A supported online migration path with continuous synchronization and a controlled final cutover"
+        },
+        {
+          "id": "b",
+          "text": "An offline export with a measured transfer time longer than the downtime allowance"
+        },
+        {
+          "id": "c",
+          "text": "Copy the full backup only after stopping production and omit continuous synchronization"
+        },
+        {
+          "id": "d",
+          "text": "Switch the target application connection before reconciling changes still arriving at the source"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> A supported online migration synchronizes data before a controlled final cutover, reducing downtime. An oversized offline window violates the requirement, backup-only movement after shutdown adds transfer time, and early redirection risks incomplete or divergent data.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a solution for migrating databases."
+    },
+    {
+      "ques": "New contractors need a bundle of group and application access that expires automatically at the end of a project. Which Entra feature is designed for this?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Entitlement management access packages"
+        },
+        {
+          "id": "b",
+          "text": "Manual permanent role assignments only"
+        },
+        {
+          "id": "c",
+          "text": "Azure resource locks"
+        },
+        {
+          "id": "d",
+          "text": "Azure availability sets"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> Access packages bundle access with request, approval, and lifecycle policies, including expiration. Availability sets and locks do not govern identity lifecycle, and permanent manual assignments do not automatically expire.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for identity governance."
+    },
+    {
+      "ques": "An organization already uses ExpressRoute but also requires IPsec encryption between its on-premises VPN device and Azure. Which design should it evaluate?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A supported site-to-site VPN over ExpressRoute private peering"
+        },
+        {
+          "id": "b",
+          "text": "Assume ExpressRoute private peering automatically encrypts every packet with IPsec"
+        },
+        {
+          "id": "c",
+          "text": "Replace encryption with resource tags"
+        },
+        {
+          "id": "d",
+          "text": "Use a blob access tier to encrypt network packets"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> ExpressRoute provides private transport but does not inherently supply end-to-end IPsec encryption. A supported VPN-over-ExpressRoute design can add it. Tags and blob tiers do not implement network encryption.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a connectivity solution that connects Azure resources to on-premises networks."
+    },
+    {
+      "ques": "A legacy Windows application expects a shared SMB path accessed concurrently by multiple servers. Rewriting it for object APIs is not feasible. Which service fits?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure Event Hubs"
+        },
+        {
+          "id": "b",
+          "text": "Azure App Configuration"
+        },
+        {
+          "id": "c",
+          "text": "Azure Files"
+        },
+        {
+          "id": "d",
+          "text": "Azure Blob Storage accessed only through REST"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Azure Files provides managed SMB file shares. Blob REST requires different application semantics, Event Hubs streams events, and App Configuration stores settings rather than shared files.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for storing unstructured data."
+    },
+    {
+      "ques": "Two related Azure SQL databases must fail over together to another region while clients retain a stable read-write connection name. Which two design actions meet these requirements? <b>Select TWO answers.</b>",
+      "ans": [
+        "c",
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Independent active geo-replication links with no coordinated failover group or stable group listener"
+        },
+        {
+          "id": "b",
+          "text": "Point-in-time restore to two new databases after the region has failed"
+        },
+        {
+          "id": "c",
+          "text": "Place the databases in a supported Azure SQL failover group"
+        },
+        {
+          "id": "d",
+          "text": "Configure clients to use the failover group's read-write listener endpoint"
+        },
+        {
+          "id": "e",
+          "text": "A zone-redundant elastic pool in the primary region only"
+        }
+      ],
+      "explanation": "<b>Correct: C and D.</b> A failover group coordinates the databases' geo-failover behavior, and its listener gives applications a stable connection endpoint. Replication is asynchronous, so forced failover can lose data. Independent links, primary-only zonal redundancy, and backup restores do not provide this combination.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a high availability solution for relational data."
+    },
+    {
+      "ques": "A payroll service must be operational within two hours after a declared outage begins. Which objective expresses this maximum acceptable downtime?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Recovery point objective"
+        },
+        {
+          "id": "b",
+          "text": "Data residency boundary"
+        },
+        {
+          "id": "c",
+          "text": "Backup retention period"
+        },
+        {
+          "id": "d",
+          "text": "Recovery time objective"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> RTO specifies the allowed restoration time after disruption. RPO concerns data loss, retention controls historical recovery availability, and residency determines where data may be stored.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a recovery solution for Azure and hybrid workloads that meets recovery objectives."
+    },
+    {
+      "ques": "A security team needs a single-tenant managed HSM service for cryptographic keys, with FIPS 140-2 Level 3 validated hardware. Secrets and certificate lifecycle management are out of scope. Which service fits?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A single-tenant Entra application registration storing a signing secret"
+        },
+        {
+          "id": "b",
+          "text": "A Standard Key Vault with software-protected keys and private endpoints"
+        },
+        {
+          "id": "c",
+          "text": "A Premium Key Vault with HSM-backed keys assumed to provide the same single-tenant Level 3 HSM pool"
+        },
+        {
+          "id": "d",
+          "text": "Azure Key Vault Managed HSM"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Managed HSM provides the specified dedicated HSM service and hardware validation. Premium Key Vault HSM-backed keys are a different offering and validation architecture. Private networking and tenant-specific applications do not turn software secrets into the required HSM service.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a solution to manage secrets, certificates, and keys."
+    },
+    {
+      "ques": "A SQL Server application depends on SQL Server Agent and cross-database queries. The team wants a managed instance with high compatibility and no OS administration. Which destination should it assess first?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure SQL Managed Instance"
+        },
+        {
+          "id": "b",
+          "text": "Azure SQL Database single database"
+        },
+        {
+          "id": "c",
+          "text": "Azure Table Storage"
+        },
+        {
+          "id": "d",
+          "text": "Azure Cosmos DB for NoSQL"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> SQL Managed Instance supports many instance-level SQL Server features, including Agent and cross-database queries. A single SQL database has different instance capabilities, and Table Storage or Cosmos DB would require a different data model.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for storing relational data."
+    },
+    {
+      "ques": "Two Azure VNets in the same region need low-latency private connectivity without an internet VPN. Their address spaces do not overlap. Which option fits?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Public IP routing through the internet"
+        },
+        {
+          "id": "b",
+          "text": "Virtual network peering"
+        },
+        {
+          "id": "c",
+          "text": "Azure Front Door"
+        },
+        {
+          "id": "d",
+          "text": "Azure DNS alone"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> VNet peering connects nonoverlapping virtual networks over Azure's backbone. Front Door is an application edge service, internet routing is unnecessary, and name resolution alone does not establish network connectivity.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution to optimize network performance."
+    },
+    {
+      "ques": "A regulator requires seven years of Azure resource logs, but only the latest month needs interactive queries. Which design best separates the two retention needs?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Send logs to Log Analytics for recent queries and to a storage account with an appropriate archive policy"
+        },
+        {
+          "id": "b",
+          "text": "Store logs only in VM temporary disks"
+        },
+        {
+          "id": "c",
+          "text": "Keep every log in interactive analytics indefinitely without evaluating costs"
+        },
+        {
+          "id": "d",
+          "text": "Send logs only to an action group"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> Diagnostic settings can route logs to both destinations. Storage supports economical long-term retention, with retrieval and immutability requirements considered. Action groups send notifications, and temporary disks do not provide durable archives.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for routing logs."
+    },
+    {
+      "ques": "A business needs regional recovery within minutes but cannot afford full duplicate peak capacity running continuously. Which strategy is the best starting point?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A DNS failover policy with no provisioned recovery application or state"
+        },
+        {
+          "id": "b",
+          "text": "A full peak-sized active-active deployment despite the explicit cost constraint"
+        },
+        {
+          "id": "c",
+          "text": "A cold backup-only site with manual infrastructure creation assumed to finish within minutes"
+        },
+        {
+          "id": "d",
+          "text": "A warm standby with replicated state, minimum running capacity, tested scale-out, and reserved capacity where needed"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Warm standby maintains enough prepared state and compute to reduce recovery time while avoiding full duplicate peak capacity. Scaling and capacity still need validation. Cold manual recovery is slower, full active-active conflicts with the cost limit, and DNS needs a working destination.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a recovery solution for Azure and hybrid workloads that meets recovery objectives."
+    },
+    {
+      "ques": "An architect selects geo-zone-redundant storage for a supported account. Which statement correctly describes its durability design?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Three local copies plus automatic application dependency failover"
+        },
+        {
+          "id": "b",
+          "text": "Synchronous replication across primary-region zones plus asynchronous replication to a secondary region"
+        },
+        {
+          "id": "c",
+          "text": "Asynchronous replication across primary zones with no geographic secondary"
+        },
+        {
+          "id": "d",
+          "text": "Synchronous replication across primary zones and synchronous commits to the secondary region"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> GZRS synchronously replicates across primary-region zones and asynchronously to a secondary region. It does not promise zero-loss synchronous regional commits or recover all application dependencies. These distinctions determine failure scope and RPO expectations.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a data solution for protection and durability."
+    },
+    {
+      "ques": "An App Service application needs to survive a zone outage within one region. Which design change directly supports this objective?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Configure a nightly source-code export only"
+        },
+        {
+          "id": "b",
+          "text": "Enable zone redundancy on a supported plan and region with sufficient healthy instance capacity"
+        },
+        {
+          "id": "c",
+          "text": "Enable HTTP compression only"
+        },
+        {
+          "id": "d",
+          "text": "Add deployment slots while keeping a single nonredundant instance"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Zone-redundant App Service spreads supported plan instances across zones. Capacity and dependencies must also tolerate loss of a zone. Slots, compression, and code exports alone do not provide zonal runtime availability.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a high availability solution for compute."
+    },
+    {
+      "ques": "An Event Grid subscriber occasionally receives the same event more than once. Which consumer design is appropriate?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Assume all events arrive exactly once in global order"
+        },
+        {
+          "id": "b",
+          "text": "Depend on event arrival order as the only business sequence"
+        },
+        {
+          "id": "c",
+          "text": "Handle events idempotently and configure retry/dead-letter handling as required"
+        },
+        {
+          "id": "d",
+          "text": "Reject every event after the first event of the day"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Event-driven delivery can be retried, and consumers must tolerate duplicates and ordering differences. Idempotency and failure handling preserve correctness; discarding unrelated events or assuming global ordering does not.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend an event-driven architecture."
+    },
+    {
+      "ques": "A vendor application cannot be modified, and the migration deadline is short. It runs on a supported operating system and will initially keep its architecture. Which migration approach fits?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Rewrite it into microservices before migration"
+        },
+        {
+          "id": "b",
+          "text": "Require serverless execution without checking compatibility"
+        },
+        {
+          "id": "c",
+          "text": "Replace its relational database with a queue"
+        },
+        {
+          "id": "d",
+          "text": "Rehost it on Azure virtual machines"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Rehosting moves a compatible workload to IaaS with limited application changes. Rewriting or changing data models increases scope, and serverless requires runtime compatibility that cannot be assumed.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS)."
+    },
+    {
+      "ques": "Hybrid employees must continue signing into cloud applications when all on-premises authentication agents are unavailable. Federation is not required. Which primary sign-in method fits?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass-through authentication with every agent hosted in the unavailable datacenter"
+        },
+        {
+          "id": "b",
+          "text": "Federation with all identity-provider servers hosted only on-premises"
+        },
+        {
+          "id": "c",
+          "text": "Microsoft Entra password hash synchronization"
+        },
+        {
+          "id": "d",
+          "text": "Entra Connect in staging mode without cloud password authentication configured"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Password hash synchronization enables cloud validation without contacting on-premises authentication agents. Pass-through authentication and on-premises federation retain that dependency. A staging synchronization server alone does not select or provide an available cloud sign-in method.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend an authentication solution."
+    },
+    {
+      "ques": "Objects will be deleted ten days after creation and read frequently during that period. Which factor most strongly argues against placing them immediately in an infrequent-access tier?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Infrequent-access tiers cannot store any object smaller than a large video"
+        },
+        {
+          "id": "b",
+          "text": "The tier name alone determines total cost, regardless of object access and lifetime"
+        },
+        {
+          "id": "c",
+          "text": "Minimum retention or early-deletion charges plus higher access costs may outweigh lower storage pricing"
+        },
+        {
+          "id": "d",
+          "text": "Hot tier automatically provides more geographic replicas than every other tier"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Early-deletion charges and higher read or retrieval costs can outweigh low capacity pricing for short-lived, frequently read objects. Tier choice is not governed by those claimed object restrictions or automatic replica counts. Model the full access and retention lifecycle.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a data storage solution to balance features, performance, and costs."
+    },
+    {
+      "ques": "Data engineers need collaborative notebooks and distributed Apache Spark transformations over a large data lake. Which managed service best fits?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure API Management"
+        },
+        {
+          "id": "b",
+          "text": "Azure Databricks"
+        },
+        {
+          "id": "c",
+          "text": "Azure DNS"
+        },
+        {
+          "id": "d",
+          "text": "Azure Bastion"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Databricks provides a managed Spark-based analytics environment and collaborative engineering workflows. DNS, API gateways, and VM access services do not execute distributed data transformations.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for data integration."
+    },
+    {
+      "ques": "Normal application traffic varies by hour and weekday. Operations needs alerts for unusual metric behavior without maintaining many fixed thresholds. What should you evaluate?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A single threshold of zero for all metrics"
+        },
+        {
+          "id": "b",
+          "text": "Azure Monitor metric alerts with dynamic thresholds"
+        },
+        {
+          "id": "c",
+          "text": "A resource-group ReadOnly lock"
+        },
+        {
+          "id": "d",
+          "text": "A monthly cost budget"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Dynamic thresholds learn metric patterns and detect deviations where the metric and alert type support them. They need sufficient history. Cost budgets and locks do not detect anomalous application metrics.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a monitoring solution."
+    },
+    {
+      "ques": "An architect needs to audit successful and failed data-plane requests to a Key Vault. Which telemetry should be enabled?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Only Azure Advisor recommendations"
+        },
+        {
+          "id": "b",
+          "text": "Key Vault resource audit logs through diagnostic settings"
+        },
+        {
+          "id": "c",
+          "text": "Only the Azure Activity Log"
+        },
+        {
+          "id": "d",
+          "text": "Only subscription cost exports"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Key Vault audit resource logs record vault operations such as secret access. The Activity Log mainly records resource management operations, while costs and Advisor do not supply the required data-plane audit trail.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a logging solution."
+    },
+    {
+      "ques": "A business workflow calls several services, waits for external approval, and then resumes. The team wants managed orchestration rather than a custom state machine on a VM. Which programming model fits?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure NAT Gateway"
+        },
+        {
+          "id": "b",
+          "text": "Azure Load Balancer"
+        },
+        {
+          "id": "c",
+          "text": "A stateless function that sleeps for days inside one invocation"
+        },
+        {
+          "id": "d",
+          "text": "Azure Durable Functions orchestration"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Durable Functions persists orchestration state and supports external events and durable waits. A long-sleeping stateless invocation is fragile and subject to execution limits; load balancing and NAT do not orchestrate workflows.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Specify components of a compute solution based on workload requirements."
+    },
+    {
+      "ques": "Existing resources lack a required cost-center tag. New deployments must also receive the tag automatically where supported. Which Azure Policy approach fits?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "An audit policy that changes tags automatically"
+        },
+        {
+          "id": "b",
+          "text": "A resource lock that inserts tags"
+        },
+        {
+          "id": "c",
+          "text": "A deny policy alone to retroactively rewrite all resources"
+        },
+        {
+          "id": "d",
+          "text": "A modify policy with a managed identity and a remediation task for existing resources"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Modify policies can add supported properties or tags, and remediation applies changes to existing resources using authorized identity permissions. Deny blocks requests, audit reports findings, and locks do not modify metadata.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for managing compliance."
+    },
+    {
+      "ques": "Twenty support engineers need the same read-only Azure permissions, and membership changes frequently. What is the most maintainable design?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Share one service principal secret among all engineers"
+        },
+        {
+          "id": "b",
+          "text": "Make every engineer a Global Administrator"
+        },
+        {
+          "id": "c",
+          "text": "Assign Reader to an Entra security group at the required scope"
+        },
+        {
+          "id": "d",
+          "text": "Assign Owner separately to each engineer"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> Group-based Azure RBAC lets membership control access while keeping the role assignment stable. Owner and Global Administrator exceed the requirement, and a shared secret loses individual accountability.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for authorizing access to Azure resources."
+    },
+    {
+      "ques": "Identical stateless VM workers should scale out when a queue backlog grows and scale in when work subsides. Which two design elements should you use? <b>Select TWO answers.</b>",
+      "ans": [
+        "a",
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Autoscale rules based on appropriate workload metrics with safe minimum and maximum capacity"
+        },
+        {
+          "id": "b",
+          "text": "A Virtual Machine Scale Set for the worker instances"
+        },
+        {
+          "id": "c",
+          "text": "An availability set without any scale automation"
+        },
+        {
+          "id": "d",
+          "text": "A dedicated host with no VM scaling policy"
+        },
+        {
+          "id": "e",
+          "text": "One manually resized VM"
+        }
+      ],
+      "explanation": "<b>Correct: A and B.</b> The scale set manages the VM fleet, and autoscale rules translate measured demand into instance changes. Workers also need safe message completion and shutdown behavior. One manually resized VM, an availability set alone, or a host without scaling rules does not provide the requested automation.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a virtual machine-based solution."
+    },
+    {
+      "ques": "Several Azure compute resources need the same application identity, and that identity must survive replacement of any single resource. Which identity type should you choose?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A shared employee account"
+        },
+        {
+          "id": "b",
+          "text": "A user-assigned managed identity"
+        },
+        {
+          "id": "c",
+          "text": "An anonymous identity"
+        },
+        {
+          "id": "d",
+          "text": "A system-assigned managed identity tied to one disposable VM"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> A user-assigned managed identity has an independent lifecycle and can be attached to multiple supported resources. A system-assigned identity is deleted with its resource; shared users and anonymity do not provide the required workload identity lifecycle.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend an identity management solution."
+    },
+    {
+      "ques": "A Functions app needs VNet connectivity and warm instances to avoid cold starts under expected demand. Which hosting approach should you evaluate?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A scale-to-zero hosting configuration with no warm capacity but an assumed zero startup delay"
+        },
+        {
+          "id": "b",
+          "text": "A larger function execution timeout used as a substitute for both networking and warm capacity"
+        },
+        {
+          "id": "c",
+          "text": "A private endpoint for inbound access used as the sole mechanism for outbound VNet integration"
+        },
+        {
+          "id": "d",
+          "text": "Functions Premium with suitable prewarmed or always-ready capacity and networking"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> A supported Premium configuration combines VNet integration and warm instances. Inbound private endpoints and outbound integration solve different network directions. Execution timeouts do not prewarm compute, and zero running instances cannot guarantee an already warm process.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a serverless-based solution."
+    },
+    {
+      "ques": "A department stores working documents on Azure Files and needs centrally managed scheduled recovery points for supported SMB shares. Which service should it use?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure Policy audit logs alone"
+        },
+        {
+          "id": "b",
+          "text": "Azure Traffic Manager"
+        },
+        {
+          "id": "c",
+          "text": "Azure Application Gateway"
+        },
+        {
+          "id": "d",
+          "text": "Azure Backup for Azure Files"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Azure Backup can manage protection and restore operations for supported Azure Files configurations. Routing services and audit logs do not preserve recoverable file-share contents; supported backup modes and redundancy must match requirements.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a backup and recovery solution for unstructured data."
+    },
+    {
+      "ques": "A GitHub Actions deployment must access Azure without storing a client secret and must have only its required deployment privileges. Which two steps should you take? <b>Select TWO answers.</b>",
+      "ans": [
+        "c",
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Run the workflow with a service principal secret and rotate it weekly"
+        },
+        {
+          "id": "b",
+          "text": "Use a human deployment account protected by MFA and store its password in GitHub"
+        },
+        {
+          "id": "c",
+          "text": "Assign the federated workload identity narrowly scoped Azure deployment roles"
+        },
+        {
+          "id": "d",
+          "text": "Configure workload identity federation restricted to the intended repository and workflow context"
+        },
+        {
+          "id": "e",
+          "text": "Place a system-assigned identity on a separate VM and assume GitHub-hosted runners inherit it"
+        }
+      ],
+      "explanation": "<b>Correct: C and D.</b> Federation exchanges a trusted external OIDC token without a stored client secret, while Azure role assignments authorize the required deployment work. Federation alone does not grant resource permissions. Stored passwords and an unrelated VM identity do not meet the authentication requirement.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend an authentication solution."
+    },
+    {
+      "ques": "A batch simulation can checkpoint and restart interrupted tasks. Cost matters more than guaranteed immediate capacity. Which VM purchasing choice is suitable for eligible pool nodes?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Dedicated hosts regardless of utilization"
+        },
+        {
+          "id": "b",
+          "text": "Azure Spot VMs with eviction-aware retry and checkpointing"
+        },
+        {
+          "id": "c",
+          "text": "A single VM with no task retry"
+        },
+        {
+          "id": "d",
+          "text": "Only on-demand peak capacity reserved indefinitely"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Spot capacity can lower costs for interruptible workloads but can be evicted or unavailable. Checkpointing and retries are essential. Always-on dedicated capacity and a nonretrying single VM do not match this cost-tolerant failure model.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a compute solution for batch processing."
+    },
+    {
+      "ques": "A globally distributed application must let each user read their own recent Cosmos DB writes while allowing weaker guarantees between unrelated users. Which consistency level best matches this?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Consistent prefix alone"
+        },
+        {
+          "id": "b",
+          "text": "Eventual consistency without session guarantees"
+        },
+        {
+          "id": "c",
+          "text": "Strong consistency because it is the only level that supports read-your-writes"
+        },
+        {
+          "id": "d",
+          "text": "Session consistency with correct session-token handling"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Session consistency supplies guarantees such as read-your-writes within a session. Clients must preserve the relevant session context. Eventual and consistent prefix do not provide the same session guarantee; strong consistency may impose unnecessary constraints.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for storing semi-structured data."
+    },
+    {
+      "ques": "Production and development need separate access boundaries, quotas, and cost tracking, while sharing organizational governance. Which structure is most appropriate?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "One resource group with only a naming convention"
+        },
+        {
+          "id": "b",
+          "text": "Separate subscriptions under suitable management groups"
+        },
+        {
+          "id": "c",
+          "text": "A separate Entra tenant for every VM"
+        },
+        {
+          "id": "d",
+          "text": "Separate tags with identical broad Owner access"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Subscriptions provide useful management, quota, and cost boundaries while management groups apply common governance. Names and tags alone do not establish these boundaries, and a tenant per VM adds unnecessary identity separation.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging."
+    },
+    {
+      "ques": "An Owner assignment appears to allow an operation, but an applicable Azure deny assignment explicitly blocks it. What is the expected authorization result?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Resource tags override both assignments"
+        },
+        {
+          "id": "b",
+          "text": "The deny assignment blocks the operation despite the Owner role"
+        },
+        {
+          "id": "c",
+          "text": "The operation succeeds if attempted through the CLI"
+        },
+        {
+          "id": "d",
+          "text": "Owner always overrides deny assignments"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Applicable deny assignments take precedence over role grants. Owner and choice of portal or CLI do not bypass them. Tags are not an independent authorization mechanism.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a solution for authorizing access to Azure resources."
+    },
+    {
+      "ques": "A queue worker saves an order and crashes before acknowledging the message. The message is delivered again. What should the architecture include?",
+      "ans": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "An assumption that queues guarantee exactly-once business side effects"
+        },
+        {
+          "id": "b",
+          "text": "A new random order ID on every retry"
+        },
+        {
+          "id": "c",
+          "text": "Idempotent processing using a durable business operation identifier"
+        },
+        {
+          "id": "d",
+          "text": "Deleting all retries before inspecting them"
+        }
+      ],
+      "explanation": "<b>Correct: C.</b> At-least-once delivery can repeat messages after failures. Durable idempotency checks prevent duplicate business effects. Transport delivery and exactly-once application outcomes are different concerns; random IDs and blind deletion lose correctness.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a messaging architecture."
+    },
+    {
+      "ques": "Domain-joined on-premises clients must access an Azure Files SMB share using their existing AD DS identities and file ACLs. Network connectivity is already available. What should you recommend?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "AD DS authentication for Azure Files, appropriate share permissions, and Windows ACLs"
+        },
+        {
+          "id": "b",
+          "text": "Enable only file ACLs while omitting the required identity authentication and share-level authorization"
+        },
+        {
+          "id": "c",
+          "text": "Assign Storage Blob Data Reader and use blob OAuth tokens for SMB access"
+        },
+        {
+          "id": "d",
+          "text": "Distribute the storage account key to every client instead of using their AD DS identities"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> AD DS-integrated Azure Files SMB access combines identity authentication, share-level permissions, and file ACLs. Blob roles do not authorize SMB, account keys do not preserve the required individual AD DS model, and ACLs alone are not the complete access path.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a solution for authorizing access to on-premises resources."
+    },
+    {
+      "ques": "An enterprise wants centrally managed API policies while API traffic stays in its on-premises environment. Which API Management capability should it evaluate?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "A self-hosted gateway in the on-premises environment"
+        },
+        {
+          "id": "b",
+          "text": "An Azure Application Gateway assumed to enforce all centrally defined API Management policies"
+        },
+        {
+          "id": "c",
+          "text": "A developer portal deployed on-premises while all gateway execution remains in Azure"
+        },
+        {
+          "id": "d",
+          "text": "A cloud-only gateway assumed to process every API request entirely on-premises"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> The self-hosted gateway runs supported API gateway processing in the chosen on-premises environment under central management. Portal location does not relocate request processing, and Application Gateway is a different product rather than an API Management gateway runtime.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a solution for API integration."
+    },
+    {
+      "ques": "Before moving a datacenter application, architects need server inventory, utilization-based sizing, and dependency relationships. Which service should they start with?",
+      "ans": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure Key Vault"
+        },
+        {
+          "id": "b",
+          "text": "Azure Migrate discovery and assessment"
+        },
+        {
+          "id": "c",
+          "text": "Azure Front Door"
+        },
+        {
+          "id": "d",
+          "text": "Azure Service Bus"
+        }
+      ],
+      "explanation": "<b>Correct: B.</b> Azure Migrate helps discover and assess workloads and dependencies for migration planning. Traffic routing, secret storage, and messaging services do not produce a datacenter migration assessment.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Evaluate on-premises servers, data, and applications for migration."
+    },
+    {
+      "ques": "A Cosmos DB application must keep serving after loss of its only configured region. What architectural change is essential?",
+      "ans": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Increase client-side connection limits only"
+        },
+        {
+          "id": "b",
+          "text": "Increase throughput only in the existing region"
+        },
+        {
+          "id": "c",
+          "text": "Change document IDs to GUIDs"
+        },
+        {
+          "id": "d",
+          "text": "Add another region and configure an appropriate failover strategy"
+        }
+      ],
+      "explanation": "<b>Correct: D.</b> Regional resilience requires data and service availability outside the failed region, together with suitable failover configuration and clients. More throughput, different IDs, and connection tuning do not create a second regional deployment.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a high availability solution for semi-structured and unstructured data."
+    },
+    {
+      "ques": "An Azure SQL workload has latency-sensitive transactions and needs a built-in readable replica. Database size fits the available tiers. Which tier should be evaluated first?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Business Critical with read scale-out"
+        },
+        {
+          "id": "b",
+          "text": "Serverless with aggressive auto-pause as the only way to guarantee stable transaction latency"
+        },
+        {
+          "id": "c",
+          "text": "Basic because it includes the same read-scale architecture as Business Critical"
+        },
+        {
+          "id": "d",
+          "text": "General Purpose chosen solely on CPU sizing without validating its I/O architecture"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> Business Critical is a strong candidate for low-latency local storage and built-in read scale-out. Basic lacks that architecture, CPU-only General Purpose sizing overlooks the stated I/O need, and auto-pause introduces resume behavior rather than consistently warm performance.<br><br><b>Difficulty:</b> Hard. <b>Topic:</b> Recommend a database service tier and compute tier."
+    },
+    {
+      "ques": "A VM application needs both quick recovery from a regional outage and recovery from corruption discovered several days later. Which two capabilities should the design include? <b>Select TWO answers.</b>",
+      "ans": [
+        "a",
+        "c"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Replication with Azure Site Recovery for regional recovery"
+        },
+        {
+          "id": "b",
+          "text": "Only accelerated networking"
+        },
+        {
+          "id": "c",
+          "text": "Retained Azure Backup recovery points for historical restoration"
+        },
+        {
+          "id": "d",
+          "text": "Only an availability set"
+        },
+        {
+          "id": "e",
+          "text": "Only a continuously synchronized replica"
+        }
+      ],
+      "explanation": "<b>Correct: A and C.</b> Replication supports recovery of a recent system state, while retained backups allow restoration before older corruption. Replication may propagate corruption; availability placement and networking performance do not provide historical recovery.<br><br><b>Difficulty:</b> Medium. <b>Topic:</b> Recommend a backup and recovery solution for compute."
+    },
+    {
+      "ques": "A team needs fast interactive queries over a continuously ingested stream of timestamped operational telemetry. Which Azure engine is purpose-built for this pattern?",
+      "ans": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "Azure Data Explorer"
+        },
+        {
+          "id": "b",
+          "text": "Azure Resource Manager"
+        },
+        {
+          "id": "c",
+          "text": "Azure Key Vault"
+        },
+        {
+          "id": "d",
+          "text": "Azure Files alone"
+        }
+      ],
+      "explanation": "<b>Correct: A.</b> Data Explorer is optimized for analytical queries over high-volume telemetry and log-style data. A file share lacks this query engine, and Key Vault or Resource Manager address different management concerns.<br><br><b>Difficulty:</b> Easy. <b>Topic:</b> Recommend a solution for data analysis."
+    }
+  ]
+}
